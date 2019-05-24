@@ -1,9 +1,17 @@
+import copy
 def serverFarm(jobs, servers):
 
     def return_min(min, array):
         for i in array :
             if i == min : 
                 return array.index(i)
+    
+    def return_first(elem, array):
+        for index, item in enumerate(array) :
+            if item == elem : 
+                return index
+    
+            
 
     def min_load(assigned_jobs) :
         min_procs = []
@@ -15,7 +23,7 @@ def serverFarm(jobs, servers):
         return return_min(min(min_procs), min_procs)
 
 
-    original_jobs = jobs
+    original_jobs = copy.deepcopy(jobs)
     jobs.sort(reverse = True)
     
     assigned_jobs = []
@@ -24,14 +32,9 @@ def serverFarm(jobs, servers):
 
     for job in jobs: 
         print("job: ", + job)
-        assigned_jobs[min_load(assigned_jobs)].append(job)
+        assigned_jobs[min_load(assigned_jobs)].append(return_first(job, original_jobs))
     
     return assigned_jobs
-
-
-    
-
-
 
 
 jobs = [15, 30, 15, 5, 10]
